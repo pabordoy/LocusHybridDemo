@@ -1,0 +1,52 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider @bind-IsDarkMode="@DarkMode" Theme="_myCustomTheme" />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar>
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        Locus Hybrid Demo
+        <MudSpacer />
+        <MudSwitch @bind-Value="@DarkMode" OnLabel="Dark" OffLabel="Light" Color="Color.Inherit" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_drawerOpen">
+        <NavMenu/>
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Large" Class="pt-2">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+@code {
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+
+    private readonly MudTheme _myCustomTheme = new()
+    {
+        ZIndex = new ZIndex()
+        {
+            Drawer = 100,
+            AppBar = 110,
+            Dialog = 1200,
+            Snackbar = 1300,
+            Tooltip = 1400,
+        },
+        PaletteLight = new PaletteLight()
+        {
+            Background = Colors.Gray.Lighten5,
+            AppbarBackground = Colors.Indigo.Darken2,
+            Primary = Colors.Indigo.Darken2,
+        }
+    };
+    
+    public bool DarkMode { get; set; }
+}

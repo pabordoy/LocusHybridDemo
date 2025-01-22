@@ -1,0 +1,21 @@
+﻿@page "/counter"
+
+<MudText Typo="Typo.h6">Counter</MudText>
+
+<MudStack Row="true">
+    <SingleValueIconWidget Title="Current count" 
+                           Value="@currentCount.ToString()"
+                           Icon="@Icons.Material.Filled.HealthAndSafety" />
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" @onclick="IncrementCount">Click me!</MudButton>
+</MudStack>
+
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}
